@@ -1,4 +1,4 @@
-package au.com.williamhill.kafkarelay;
+package au.com.williamhill.rekafka;
 
 public class EndConfig {
   public String topic;
