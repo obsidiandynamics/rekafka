@@ -14,6 +14,7 @@ allprojects {
     compile 'com.obsidiandynamics.yconf:yconf-snakeyaml:0.1.0'
     compile 'com.obsidiandynamics.yconf:yconf-juel:0.1.0'
     compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'com.beust:jcommander:1.71'
     
     runtime 'org.slf4j:slf4j-log4j12:1.7.25'
     runtime 'log4j:log4j:1.2.17'
