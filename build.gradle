@@ -9,20 +9,7 @@ allprojects {
     jcenter()
   }
   
-  dependencies {
-    compile 'com.obsidiandynamics.yconf:yconf-core:0.1.0'
-    compile 'com.obsidiandynamics.yconf:yconf-snakeyaml:0.1.0'
-    compile 'com.obsidiandynamics.yconf:yconf-juel:0.1.0'
-    compile 'org.slf4j:slf4j-api:1.7.25'
-    compile 'com.beust:jcommander:1.71'
-    compile 'org.apache.kafka:kafka-clients:0.8.2.2'
-    compile 'org.apache.kafka:kafka_2.11:0.8.2.2'
-    
-    runtime 'org.slf4j:slf4j-log4j12:1.7.25'
-    runtime 'log4j:log4j:1.2.17'
-  
-    testCompile 'junit:junit:4.12'
-  }
+  dependencies {}
 
   jacoco {
     toolVersion = '0.7.9'
@@ -65,12 +52,40 @@ task jacocoRootReport(type: JacocoReport) {
 
 def packageName = 'rekafka'
 
+def kafkaVersion = '0.8.2.2'
 dependencies {
+  compile 'com.obsidiandynamics.yconf:yconf-core:0.1.0'
+  compile 'com.obsidiandynamics.yconf:yconf-snakeyaml:0.1.0'
+  compile 'com.obsidiandynamics.yconf:yconf-juel:0.1.0'
+  compile 'org.slf4j:slf4j-api:1.6.1'
+  compile 'com.beust:jcommander:1.71'
+  compile "org.apache.kafka:kafka-clients:${kafkaVersion}"
+  compile "org.apache.kafka:kafka_2.11:${kafkaVersion}"
+  
+  runtime 'org.slf4j:slf4j-log4j12:1.6.1'
+  runtime 'log4j:log4j:1.2.17'
+
+  testCompile 'junit:junit:4.12'
 }
 
 jar {
   baseName packageName
   finalizedBy jacocoRootReport
+}
+
+task fullJar(type: Jar) {
+  dependsOn configurations.compile
+  dependsOn configurations.runtime
+  manifest {
+    attributes 'Main-Class': 'au.com.williamhill.rekafka.Relay'
+    attributes 'Version': "${kafkaVersion}"
+  }
+  from sourceSets.main.output
+  from { // bundle all dependencies
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) }
+  }   
+  baseName packageName + '-full'
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -83,4 +98,8 @@ task sourcesJar(type: Jar) {
   baseName packageName
   from sourceSets.main.allSource
   classifier = 'sources'
+}
+
+build {
+  dependsOn fullJar
 }
