@@ -58,7 +58,7 @@ public final class Relay implements Runnable {
   }
   
   private KafkaStream<byte[], byte[]> createConsumerStream(ConsumerConnector consumer) {
-    final Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
+    final Map<String, Integer> topicCountMap = new HashMap<>();
     topicCountMap.put(config.source.topic, 1);
     final Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumer.createMessageStreams(topicCountMap);
     final List<KafkaStream<byte[], byte[]>> streams = consumerMap.get(config.source.topic);
