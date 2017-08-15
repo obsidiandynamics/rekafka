@@ -44,3 +44,6 @@ The logging configuration is currently in `src/main/resources/log4j.properties`;
 ```sh
 java -jar rekafka-full-0.1.0-SNAPSHOT.jar -Dlog4j.configuration=file:log4j-custom.properties
 ```
+
+# Compatibility
+Rekafka has been briefly tested with combinations of Kafka brokers 0.8.x and 0.10.x on both source and sink ends.
