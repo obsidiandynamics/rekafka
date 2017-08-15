@@ -1,6 +1,6 @@
 Rekafka
 ===
-Simple relay for moving messages from one Kafka topic to another, across different brokers if need be. Rekafka gives you a controlled way of copying messages; running either as a daemon - copying messages as they arrive, or copying a batch of messages at a time.
+Simple relay for copying messages from one Kafka topic to another, across different brokers if need be. Rekafka gives you a controlled way of copying messages; running either as a daemon - copying messages as they arrive, or copying a batch of messages at a time.
 
 # Running
 
