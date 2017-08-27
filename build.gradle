@@ -54,9 +54,9 @@ def packageName = 'rekafka'
 
 def kafkaVersion = '0.8.2.2'
 dependencies {
-  compile 'com.obsidiandynamics.yconf:yconf-core:0.1.0'
-  compile 'com.obsidiandynamics.yconf:yconf-snakeyaml:0.1.0'
-  compile 'com.obsidiandynamics.yconf:yconf-juel:0.1.0'
+  compile 'com.obsidiandynamics.yconf:yconf-core:0.2.0'
+  compile 'com.obsidiandynamics.yconf:yconf-snakeyaml:0.2.0'
+  compile 'com.obsidiandynamics.yconf:yconf-juel:0.2.0'
   compile 'org.slf4j:slf4j-api:1.6.1'
   compile 'com.beust:jcommander:1.71'
   compile "org.apache.kafka:kafka-clients:${kafkaVersion}"
